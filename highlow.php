@@ -13,10 +13,12 @@ else {
 }
 
 $number = mt_rand(1, 100);
-$guesses = 0;
-
+$guesses = 1;
 
 do {
+
+	$input = fgets(STDIN);
+
 	if($number > $input) {
 		fwrite(STDOUT, "Higher \n");
 	}
@@ -32,6 +34,6 @@ do {
 	$guesses++;
 	
 }
-while ($input != $number)
+while ($input != $number);
 
 ?>
