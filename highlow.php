@@ -1,39 +1,70 @@
 <?php
 
-fwrite(STDOUT, "Let's play Number Guessing Game! yes or no\n");
+if($argc == 3) {
+	if(is_numeric($argv[1])  && is_numeric($argv[2])) {
+		if($argv[1] < $argv[2]) {
+			$min = $argv[1];
+			$max = $argv[2];
+		}
+		else {
+			$min = $argv[2];
+			$max = $argv[1];	
+		}
 
-$answer = strtolower(trim(fgets(STDIN)));
+
+$number = rand($min, $max);
 
 
-if($answer == "yes") {
-	fwrite(STDOUT, "Pick a number between 1 and 100.\n");
-}
-else {
-	fwrite(STDOUT, "BOR-ING\n");
-}
+			// Opening question goes here
+			fwrite(STDOUT, "Let's play Number Guessing Game! yes or no\n");
 
-$number = mt_rand(1, 100);
-$guesses = 1;
+			$answer = strtolower(trim(fgets(STDIN)));
 
-do {
 
-	$input = fgets(STDIN);
+			if($answer == "yes") {
+				fwrite(STDOUT, "Pick a number between $min and $max.\n");
+			}
+			else {
+				fwrite(STDOUT, "BOR-ING\n");
+			}
+			// Set up variables here
+			// $number = mt_rand(1, 100);
 
-	if($number > $input) {
-		fwrite(STDOUT, "Higher \n");
+			}
+			$guesses = 1;
+
+			// Game code goes here
+			do {
+
+			$input = fgets(STDIN);
+
+			if($number > $input) {
+				fwrite(STDOUT, "Higher \n");
+			}
+
+			elseif($number < $input) {
+				fwrite(STDOUT, "Lower \n");
+
+			}
+			elseif($number == $input) {
+				fwrite(STDOUT, "You got it!\n");
+				fwrite(STDOUT, "And in $guesses guesses!\n");
+			}
+			$guesses++;
+
+		}
+			// while goes here or game will not run
+			while ($input != $number);
+		
 	}
-
-	elseif($number < $input) {
-		fwrite(STDOUT, "Lower \n");
-
-	}
-	elseif($number == $input) {
-		fwrite(STDOUT, "You got it!\n");
-		fwrite(STDOUT, "And in $guesses guesses!\n");
-	}
-	$guesses++;
-	
+	else  {
+		fwrite(STDOUT, "You must use integers!\n");
 }
-while ($input != $number);
+// 	else {
+// 		fwrite(STDOUT, "You must put three arguments!\n");
+
+// }
+
+
 
 ?>
